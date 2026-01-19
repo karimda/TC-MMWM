@@ -1,0 +1,36 @@
+# ===================================================
+# Deployment configuration: Workstation
+# Optimized for real-time inference on a high-performance GPU
+# ===================================================
+
+deployment_name: "workstation"
+
+hardware:
+  device: "cuda"
+  gpu_model: "NVIDIA RTX 3090"  # Example high-end GPU
+  cpu: "Intel Xeon W-2295"
+  ram_gb: 64
+
+model:
+  precision: "fp16"               # Mixed-precision for speed
+  batch_size: 1                   # Real-time control loop
+  use_language: True
+  use_vision: True
+  use_sensors: True
+  use_causal_operator: True
+  use_counterfactual_reasoning: True
+
+inference:
+  real_time: True
+  control_frequency_hz: 50
+  max_latency_ms: 20
+
+logging:
+  log_dir: "experiments/results/logs/deployment/workstation"
+  save_visualizations: True
+  verbose: True
+
+evaluation:
+  measure_latency: True
+  measure_memory: True
+  run_demo_tasks: True

@@ -1,0 +1,63 @@
+manipulation/
+├── images/
+│   ├── task_001/
+│   │   ├── frame_0001.png
+│   │   ├── frame_0002.png
+│   │   └── ...
+│   ├── task_002/
+│   │   ├── frame_0001.png
+│   │   ├── frame_0002.png
+│   │   └── ...
+│   └── ...
+├── actions/
+│   ├── task_001_actions.csv
+│   ├── task_002_actions.csv
+│   └── ...
+└── sensors/
+    ├── task_001_sensors.csv
+    ├── task_002_sensors.csv
+    └── ...
+
+File Descriptions
+images/
+
+RGB frames from the simulated manipulation tasks.
+
+Organized by task ID (task_001, task_002, etc.).
+
+Naming: frame_{timestep}.png.
+
+Resolution: 128x128 pixels, normalized to [0,1].
+
+actions/
+
+CSV files of executed actions per task:
+
+timestep, joint_1, joint_2, joint_3, gripper, reward
+1, 0.12, -0.05, 0.3, 0.0, 0.0
+2, 0.14, -0.04, 0.31, 0.1, 0.05
+...
+
+Actions include all joint actuations and gripper commands.
+
+Reward is optional but useful for performance monitoring.
+
+sensors/
+
+CSV files with proprioceptive and tactile readings:
+timestep, joint_1_pos, joint_2_pos, joint_3_pos, joint_1_vel, joint_2_vel, joint_3_vel, torque_1, torque_2, torque_3, contact_force
+1, 0.12, -0.05, 0.3, 0.01, -0.002, 0.003, 0.0, 0.0, 0.1, 0.05
+2, 0.14, -0.04, 0.31, 0.01, -0.002, 0.004, 0.0, 0.0, 0.11, 0.06
+...
+
+Captures the physical state of the manipulator at each timestep.
+
+Sensor data aligned with frames and actions for multimodal learning.
+
+Notes
+
+Each task folder is self-contained for reproducibility.
+
+Images, actions, and sensors are temporally synchronized.
+
+Naming and structure align with build_dataset.py for seamless preprocessing.

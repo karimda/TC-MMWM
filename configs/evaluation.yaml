@@ -1,0 +1,69 @@
+# ===================================================
+# Evaluation configuration for TC-MMWM
+# Overrides defaults in default.yaml for evaluation
+# ===================================================
+
+# -----------------------------
+# General evaluation settings
+# -----------------------------
+evaluation:
+  episodes: 100                       # Number of episodes per evaluation run
+  max_horizon: 50                     # Maximum number of steps per episode
+  shuffle: False
+  deterministic: True                 # Use deterministic policy for evaluation
+  log_results: True
+  log_dir: "experiments/results/logs/evaluation"
+
+# -----------------------------
+# Metrics to compute
+# -----------------------------
+metrics:
+  task_success_rate: True             # Percentage of successful task completions
+  long_horizon_stability: True        # Evaluate performance over extended horizons
+  generalization_to_unseen: True      # Measure performance on OOD tasks
+  language_constraint_compliance: True
+  robustness_to_noise: True
+  counterfactual_accuracy: True        # Evaluate intervention-consistency of latent states
+  inference_latency: True
+  memory_usage: True
+  energy_consumption: True
+
+# -----------------------------
+# OOD (Out-of-Distribution) evaluation
+# -----------------------------
+ood:
+  enabled: True
+  scenarios:
+    - novel_object_geometries
+    - unseen_instruction_compositions
+    - altered_physical_dynamics
+  retention_threshold: 0.85            # Expected fraction of in-distribution performance retained
+
+# -----------------------------
+# Model settings for evaluation
+# -----------------------------
+model:
+  counterfactual_steps: 5              # Steps to rollout in latent space
+  use_modality_dropout: False           # Do not drop modalities during evaluation
+
+# -----------------------------
+# Hardware deployment options
+# -----------------------------
+deployment:
+  evaluate_on_embedded: True
+  platforms:
+    - name: "Jetson AGX Orin"
+      max_latency_ms: 35
+    - name: "Jetson Xavier NX"
+      max_latency_ms: 50
+    - name: "Workstation RTX GPU"
+      max_latency_ms: 20
+
+# -----------------------------
+# Logging & visualization
+# -----------------------------
+logging:
+  visualize_trajectories: True
+  visualize_counterfactuals: True
+  save_figures: True
+  figure_dir: "experiments/results/figures"

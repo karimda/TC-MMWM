@@ -1,0 +1,69 @@
+# ===================================================
+# Training configuration for TC-MMWM
+# Overrides defaults in default.yaml for training
+# ===================================================
+
+# -----------------------------
+# General training settings
+# -----------------------------
+training:
+  epochs: 250                       # Extend number of epochs for better convergence
+  optimizer: "adamw"                # Using AdamW optimizer
+  learning_rate: 0.0003
+  weight_decay: 0.01
+  grad_clip_norm: 5.0
+  scheduler:
+    type: "cosine_annealing"
+    T_max: 250
+    eta_min: 1e-6
+
+# -----------------------------
+# Batch / data settings for training
+# -----------------------------
+data:
+  batch_size: 32
+  shuffle: True
+  augmentation: True                # Apply augmentations during training
+  vision:
+    input_size: [128, 128, 3]       # Same as default
+  language:
+    max_tokens: 64
+  sensors:
+    normalize: True
+
+# -----------------------------
+# Loss weights
+# -----------------------------
+loss_weights:
+  state_prediction: 1.0
+  action_consistency: 1.0
+  constraint_violation: 2.0
+  latent_smoothness: 0.5
+
+# -----------------------------
+# Checkpointing / Logging
+# -----------------------------
+logging:
+  log_dir: "experiments/results/logs/training"
+  save_checkpoint_every: 5          # Save every 5 epochs during training
+  checkpoint_dir: "experiments/checkpoints/training"
+  tensorboard: True
+  visualize_gradients: True
+
+# -----------------------------
+# Training-specific model options
+# -----------------------------
+model:
+  counterfactual_steps: 5           # Number of steps for counterfactual rollout during training
+  use_modality_dropout: True        # Randomly drop modalities to encourage causal invariance
+
+# -----------------------------
+# Simulation-to-Real adjustments for training
+# -----------------------------
+sim2real:
+  domain_randomization: True
+  randomize_textures: True
+  randomize_lighting: True
+  randomize_physics: True
+  latent_regularization: True
+  mta_compatible: False              # Optional, depending on dataset licenses

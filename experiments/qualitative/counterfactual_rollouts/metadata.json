@@ -1,0 +1,6 @@
+{
+  "latent_state": "shared_initial_state",
+  "actions": ["push_left", "push_right", "grasp"],
+  "model": "TC-MMWM",
+  "rollout_horizon": 10
+}

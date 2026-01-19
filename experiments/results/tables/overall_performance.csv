@@ -1,0 +1,4 @@
+Model,Task Success (%),Generalization (%),Episodes to 80%,Robustness Drop (%)
+TC-MMWM,92.4,88.7,50,4.2
+VLA Transformer,78.1,63.1,120,18.7
+Non-causal World Model,81.3,68.9,80,15.3

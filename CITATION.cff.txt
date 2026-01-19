@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+
+title: "Temporal Causal Multimodal World Model (TC-MMWM)"
+
+message: >
+  If you use this software or its accompanying data and experiments in your research,
+  please cite the associated manuscript.
+
+type: software
+
+authors:
+  - family-names: Dab
+    given-names: Karim
+    affiliation: Anonymous Institution
+    email: anonymous@institution.edu
+
+version: 1.0.0
+
+date-released: 2026-01-01
+
+license: MIT
+
+repository-code: "https://github.com/anonymous/tc-mmwm"
+
+keywords:
+  - robotics
+  - multimodal learning
+  - causal modeling
+  - world models
+  - embodied artificial intelligence
+  - sim-to-real
+  - counterfactual reasoning
+
+preferred-citation:
+  type: article
+  title: "Temporal Causal Multimodal World Model for Long-Horizon Robotic Reasoning"
+  authors:
+    - family-names: Dabbabi
+      given-names: Karim
+  journal: "Science Robotics"
+  year: 2026
+  status: submitted

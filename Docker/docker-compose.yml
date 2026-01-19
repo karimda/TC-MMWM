@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  tc_mmwm_train:
+    image: tc-mmwm:1.0
+    container_name: tc_mmwm_train
+    build:
+      context: .
+      dockerfile: Dockerfile
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./TC-MMWM:/workspace/TC-MMWM
+      - ./data:/workspace/TC-MMWM/data
+      - ./experiments:/workspace/TC-MMWM/experiments
+    command: python scripts/train.py
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+
+  tc_mmwm_eval:
+    image: tc-mmwm:1.0
+    container_name: tc_mmwm_eval
+    build:
+      context: .
+      dockerfile: Dockerfile
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./TC-MMWM:/workspace/TC-MMWM
+      - ./data:/workspace/TC-MMWM/data
+      - ./experiments:/workspace/TC-MMWM/experiments
+    command: python scripts/evaluate.py
+    depends_on:
+      - tc_mmwm_train
+
+  tc_mmwm_notebook:
+    image: tc-mmwm:1.0
+    container_name: tc_mmwm_notebook
+    build

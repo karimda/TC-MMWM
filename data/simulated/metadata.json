@@ -1,0 +1,69 @@
+{
+  "simulated_dataset": {
+    "description": "Multimodal simulated dataset for training and evaluating the Temporal Causal Multimodal World Model (TC-MMWM). Includes manipulation and navigation tasks with synchronized visual, language, and sensor data.",
+    "tasks": [
+      {
+        "name": "manipulation",
+        "num_episodes": 150,
+        "episode_duration": "10-30 seconds",
+        "modalities": {
+          "vision": {
+            "type": "RGB",
+            "resolution": "128x128",
+            "format": "PNG",
+            "normalization": "0-1"
+          },
+          "language": {
+            "type": "instruction",
+            "format": "text",
+            "embedding": "pretrained transformer"
+          },
+          "sensors": {
+            "type": ["proprioceptive", "tactile", "joint positions"],
+            "format": "CSV",
+            "sampling_rate": "50 Hz"
+          },
+          "actions": {
+            "type": ["gripper command", "end-effector velocity"],
+            "format": "CSV",
+            "sampling_rate": "50 Hz"
+          }
+        }
+      },
+      {
+        "name": "navigation",
+        "num_episodes": 120,
+        "episode_duration": "20-60 seconds",
+        "modalities": {
+          "vision": {
+            "type": "RGB",
+            "resolution": "128x128",
+            "format": "PNG",
+            "normalization": "0-1"
+          },
+          "language": {
+            "type": "instruction",
+            "format": "text",
+            "embedding": "pretrained transformer"
+          },
+          "sensors": {
+            "type": ["IMU", "proprioception", "LIDAR/range sensors"],
+            "format": "CSV",
+            "sampling_rate": "50 Hz"
+          },
+          "actions": {
+            "type": ["linear velocity", "angular velocity", "steering angle"],
+            "format": "CSV",
+            "sampling_rate": "50 Hz"
+          }
+        }
+      }
+    ],
+    "splits": {
+      "train": 0.7,
+      "val": 0.15,
+      "test": 0.15
+    },
+    "notes": "All episodes include synchronized multimodal data for temporal causal modelling. Vision, sensors, and actions are aligned at the same timestep for training TC-MMWM."
+  }
+}

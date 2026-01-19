@@ -1,0 +1,65 @@
+# Base image with CUDA support for GPU acceleration
+FROM nvidia/cuda:12.1.105-cudnn8-devel-ubuntu22.04
+
+# Metadata
+LABEL maintainer="Karim Dab <your.email@example.com>"
+LABEL description="Docker image for TC-MMWM: Temporal Causal Multimodal World Model"
+
+# Set environment variables
+ENV DEBIAN_FRONTEND=noninteractive
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    cmake \
+    git \
+    curl \
+    wget \
+    vim \
+    unzip \
+    pkg-config \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender-dev \
+    python3.10 \
+    python3.10-dev \
+    python3-pip \
+    python3-venv \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set Python 3.10 as default
+RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1
+RUN update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+
+# Upgrade pip and setuptools
+RUN pip install --upgrade pip setuptools wheel
+
+# Set working directory
+WORKDIR /workspace/TC-MMWM
+
+# Copy project files
+COPY . /workspace/TC-MMWM
+
+# Install Python dependencies
+# Use requirements.txt first; can also install environment.yml if using conda
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose ports if using notebooks or real-time visualization
+EXPOSE 8888
+EXPOSE 6006
+
+# Default entrypoint for running scripts
+ENTRYPOINT ["python", "scripts/train.py"]
+
+# Optional: Add a non-root user (for security in embedded platforms)
+# RUN useradd -ms /bin/bash tc_mmwm_user
+# USER tc_mmwm_user
+
+# Notes:
+# - For Jetson devices, use NVIDIA L4T base images with CUDA 11.x support.
+# - To build: docker build -t tc-mmwm:1.0 .
+# - To run: docker run --gpus all -it --rm tc-mmwm:1.0

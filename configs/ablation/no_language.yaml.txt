@@ -1,0 +1,37 @@
+# ===================================================
+# Ablation configuration: no_language
+# Disables the language modality to measure its contribution
+# ===================================================
+
+evaluation:
+  ablation_name: "no_language"
+  log_dir: "experiments/results/logs/ablation/no_language"
+  visualize_trajectories: True
+  visualize_counterfactuals: True
+
+model:
+  use_language: False                # Disable language modality
+  use_vision: True
+  use_sensors: True
+  use_causal_operator: True
+  use_counterfactual_reasoning: True
+
+training:
+  # Training can be reused from default or training.yaml
+  # Optionally, you can finetune without language
+  finetune: False
+
+metrics:
+  task_success_rate: True
+  long_horizon_stability: True
+  generalization_to_unseen: True
+  language_constraint_compliance: False  # Not applicable as language is removed
+  robustness_to_noise: True
+  counterfactual_accuracy: True
+
+ood:
+  enabled: True
+  scenarios:
+    - novel_object_geometries
+    - unseen_instruction_compositions
+    - altered_physical_dynamics

@@ -1,0 +1,61 @@
+Folder structure:
+navigation/
+├── images/
+│   ├── episode_001/
+│   │   ├── frame_0001.png
+│   │   ├── frame_0002.png
+│   │   └── ...
+│   ├── episode_002/
+│   │   ├── frame_0001.png
+│   │   ├── frame_0002.png
+│   │   └── ...
+│   └── ...
+├── actions/
+│   ├── episode_001_actions.csv
+│   ├── episode_002_actions.csv
+│   └── ...
+└── sensors/
+    ├── episode_001_sensors.csv
+    ├── episode_002_sensors.csv
+    └── ...
+
+File Descriptions
+images/
+
+RGB images captured from the simulated navigation environment (e.g., indoor or outdoor map).
+
+Organized by episode (episode_001, episode_002, …).
+
+Naming: frame_{timestep}.png.
+
+Resolution: 128x128 pixels, normalized to [0,1].
+
+Includes visual cues like walls, obstacles, and goal locations.
+
+actions/
+
+CSV files storing the robot’s actions during navigation:
+timestep, linear_vel, angular_vel, steering_angle, reward
+1, 0.12, 0.0, 0.0, 0.0
+2, 0.14, -0.05, 0.01, 0.05
+...
+Actions include linear velocity, angular velocity, and any steering commands.
+
+Reward column optional for task performance evaluation.
+sensors/
+
+CSV files containing proprioceptive, IMU, and range readings:
+timestep, pos_x, pos_y, theta, lin_vel_x, lin_vel_y, ang_vel, lidar_1, lidar_2, ..., lidar_n
+1, 0.0, 0.0, 0.0, 0.12, 0.0, 0.0, 2.1, 2.0, ..., 1.8
+2, 0.14, 0.0, -0.05, 0.14, 0.0, -0.05, 2.0, 2.1, ..., 1.7
+...
+Sensors synchronized with image frames and actions for multimodal learning.
+Notes
+
+Each episode folder is self-contained for reproducibility.
+
+Designed for navigation tasks in simulation.
+
+Dataset structure aligns with build_dataset.py for easy preprocessing.
+
+Supports temporal alignment for multimodal causal modelling.

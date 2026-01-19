@@ -1,0 +1,107 @@
+{
+  "dataset_name": "TC-MMWM Real-Robot Evaluation Dataset",
+  "dataset_version": "1.0",
+  "description": "Real-robot execution logs used to evaluate the Temporal Causal Multimodal World Model (TC-MMWM) under real-world conditions, including manipulation and navigation tasks with multimodal sensing.",
+  "data_type": "real_robot",
+  "anonymization": {
+    "hardware_identifiers_removed": true,
+    "operator_identity_removed": true,
+    "environment_identifiers_generalized": true
+  },
+  "robot_platform": {
+    "type": "Fixed-base and mobile manipulators",
+    "degrees_of_freedom": 7,
+    "end_effector": "Parallel gripper",
+    "control_frequency_hz": 50,
+    "notes": "Exact robot model names are omitted to preserve anonymity during peer review."
+  },
+  "sensing_modalities": {
+    "vision": {
+      "sensor_type": "RGB camera",
+      "input_resolution": [128, 128],
+      "frame_rate_hz": 30,
+      "preprocessing": "Resize, normalization, random occlusion during training"
+    },
+    "language": {
+      "input_type": "Natural language task instructions",
+      "tokenization": "Transformer-based tokenizer",
+      "max_sequence_length": 32
+    },
+    "proprioceptive_and_tactile": {
+      "signals": [
+        "joint_positions",
+        "joint_velocities",
+        "joint_torques",
+        "end_effector_force",
+        "tactile_contact"
+      ],
+      "sampling_rate_hz": 200,
+      "preprocessing": "Low-pass filtering and normalization"
+    }
+  },
+  "tasks": {
+    "manipulation": {
+      "examples": [
+        "object pick-and-place",
+        "constrained insertion",
+        "contact-rich alignment"
+      ],
+      "episodes": 120
+    },
+    "navigation": {
+      "examples": [
+        "goal-directed navigation",
+        "obstacle avoidance",
+        "language-conditioned waypoint following"
+      ],
+      "episodes": 80
+    }
+  },
+  "execution_conditions": {
+    "lighting_variations": true,
+    "object_geometry_variations": true,
+    "instruction_variations": true,
+    "external_disturbances": "minor, unstructured"
+  },
+  "calibration": {
+    "camera_calibration": "camera_calibration.yaml",
+    "kinematics_calibration": "kinematics_calibration.yaml",
+    "force_torque_calibration": "force_torque_calibration.yaml",
+    "action_space_calibration": "action_space_calibration.yaml"
+  },
+  "logging": {
+    "log_format": "per-episode JSON and binary tensors",
+    "logged_signals": [
+      "multimodal observations",
+      "latent causal states",
+      "executed actions",
+      "predicted counterfactual rollouts",
+      "constraint violations"
+    ],
+    "time_synchronized": true
+  },
+  "evaluation_usage": {
+    "used_for_training": false,
+    "used_for_validation": false,
+    "used_for_testing": true,
+    "associated_figures": [
+      "Figure 3",
+      "Figure 4",
+      "Figure 5",
+      "Figure 6"
+    ]
+  },
+  "statistics": {
+    "total_episodes": 200,
+    "average_episode_length_steps": 145,
+    "failure_rate_percent": 6.5
+  },
+  "ethical_and_safety_notes": {
+    "human_subjects_involved": false,
+    "safety_protocols_followed": true,
+    "unsafe_actions_preemptively_blocked": true
+  },
+  "license": "Restricted for peer review; public release of anonymized subset planned upon publication",
+  "contact": {
+    "role": "Corresponding author",
+    "email": "avail

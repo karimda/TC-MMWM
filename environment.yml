@@ -1,0 +1,102 @@
+name: tc-mmwm
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+
+dependencies:
+  # =====================
+  # Core system
+  # =====================
+  - python=3.10
+  - pip
+  - setuptools
+  - wheel
+
+  # =====================
+  # PyTorch (CUDA-capable)
+  # =====================
+  - pytorch=2.1
+  - torchvision=0.16
+  - torchaudio=2.1
+  - pytorch-cuda=12.1
+
+  # =====================
+  # Scientific stack
+  # =====================
+  - numpy=1.26
+  - scipy=1.11
+  - pandas=2.1
+  - scikit-learn=1.3
+  - matplotlib=3.8
+  - seaborn=0.13
+
+  # =====================
+  # Robotics & simulation
+  # =====================
+  - pybullet=3.2
+  - pinocchio
+  - eigen
+  - mujoco
+
+  # =====================
+  # Logging & utilities
+  # =====================
+  - tqdm
+  - pyyaml
+  - rich
+  - hydra-core=1.3
+  - omegaconf=2.3
+
+  # =====================
+  # Testing & reproducibility
+  # =====================
+  - pytest
+  - pytest-cov
+  - black
+  - isort
+
+  # =====================
+  # Visualization & notebooks
+  # =====================
+  - jupyterlab
+  - ipykernel
+  - notebook
+
+  # =====================
+  # Pip-only dependencies
+  # =====================
+  - pip:
+      # Transformers & language
+      - transformers==4.36.2
+      - tokenizers==0.15.0
+      - sentencepiece
+
+      # Vision models
+      - timm==0.9.12
+      - opencv-python
+
+      # RL & control
+      - gymnasium==0.29.1
+      - stable-baselines3==2.2.1
+
+      # Experiment tracking
+      - wandb==0.16.1
+
+      # Serialization & deployment
+      - onnx
+      - onnxruntime
+      - tensorrt; platform_system == "Linux"
+
+      # Misc
+      - einops
+      - tabulate
+
+Reproduction commands
+      conda env create -f environment.yml
+      conda activate tc-mmwm
+
+      For Jetson, install with:
+      conda env create -f environment.yml --no-default-packages
+

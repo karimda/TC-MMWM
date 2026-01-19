@@ -1,0 +1,35 @@
+# ===================================================
+# Ablation configuration: no_causal_operator
+# Disables the causal composition operator to evaluate its contribution
+# ===================================================
+
+evaluation:
+  ablation_name: "no_causal_operator"
+  log_dir: "experiments/results/logs/ablation/no_causal_operator"
+  visualize_trajectories: True
+  visualize_counterfactuals: True
+
+model:
+  use_language: True
+  use_vision: True
+  use_sensors: True
+  use_causal_operator: False          # Disable causal composition operator
+  use_counterfactual_reasoning: True
+
+training:
+  finetune: False                     # Use pretrained weights or default training
+
+metrics:
+  task_success_rate: True
+  long_horizon_stability: True
+  generalization_to_unseen: True
+  language_constraint_compliance: True
+  robustness_to_noise: True
+  counterfactual_accuracy: True
+
+ood:
+  enabled: True
+  scenarios:
+    - novel_object_geometries
+    - unseen_instruction_compositions
+    - altered_physical_dynamics

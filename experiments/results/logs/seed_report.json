@@ -1,0 +1,6 @@
+{
+  "seeds": [42, 123, 999],
+  "deterministic": true,
+  "framework": "PyTorch",
+  "cuda_determinism": true
+}
