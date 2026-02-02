@@ -109,9 +109,6 @@ python scripts/train.py --config configs/training.yaml
 bash
 python scripts/run_ablation.py --config configs/ablation/no_language.yaml
 ```
-
-
-
 ##  Evaluation
 
 ### Full evaluation
@@ -131,14 +128,10 @@ python scripts/evaluate.py --metric long_horizon
 bash
 python scripts/evaluate.py --metric ood
 
-
 ### Real-time latency benchmark
 
 bash
 python scripts/benchmark_latency.py --platform jetson_orin
-
-
-
 
 ##  Hardware Used
 
